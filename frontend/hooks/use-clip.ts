@@ -30,7 +30,7 @@ export const useClip = () => {
 
       const baseUrl =
         process.env.NODE_ENV === "production"
-          ? "https://clipfy-backend-1e24nn3hz-justdhifs-projects.vercel.app"
+          ? "https://clipfy-backend-one.vercel.app/"
           : "http://127.0.0.1:4000";
 
       const response = await axios.post(`${baseUrl}/api/clip`, options, {

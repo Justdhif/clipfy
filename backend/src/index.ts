@@ -14,6 +14,10 @@ app.use(express.json());
 
 app.use('/api/clip', clipRouter);
 
+app.get('/', (req, res) => {
+  res.json({ message: 'Clipify API is running smoothly!' });
+});
+
 app.get('/health', (req, res) => {
   res.json({ status: 'ok' });
 });

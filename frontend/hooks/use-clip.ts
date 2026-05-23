@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import axios from 'axios';
+import { useState } from "react";
+import axios from "axios";
 
 interface ClipOptions {
   url: string;
@@ -22,14 +22,19 @@ export const useClip = () => {
     try {
       // Simulate progress for UI feedback
       const progressInterval = setInterval(() => {
-        setProgress(prev => {
+        setProgress((prev) => {
           if (prev >= 90) return prev;
           return prev + Math.floor(Math.random() * 10) + 1;
         });
       }, 1500);
 
-      const response = await axios.post('http://127.0.0.1:4000/api/clip', options, {
-        responseType: 'blob', // Important for downloading files
+      const baseUrl =
+        process.env.NODE_ENV === "production"
+          ? process.env.NEXT_PUBLIC_API_URI
+          : process.env.NEXT_PUBLIC_LOCAL_URI;
+
+      const response = await axios.post(`${baseUrl}/api/clip`, options, {
+        responseType: "blob", // Important for downloading files
       });
 
       clearInterval(progressInterval);
@@ -37,17 +42,16 @@ export const useClip = () => {
 
       // Trigger download
       const url = window.URL.createObjectURL(new Blob([response.data]));
-      const link = document.createElement('a');
+      const link = document.createElement("a");
       link.href = url;
-      link.setAttribute('download', 'clipify-result.mp4');
+      link.setAttribute("download", "clipify-result.mp4");
       document.body.appendChild(link);
       link.click();
-      
+
       // Cleanup
       link.remove();
       window.URL.revokeObjectURL(url);
       setSuccess(true);
-      
     } catch (err: any) {
       console.error(err);
       if (err.response && err.response.data instanceof Blob) {
@@ -55,12 +59,14 @@ export const useClip = () => {
         const text = await err.response.data.text();
         try {
           const data = JSON.parse(text);
-          setError(data.error || 'An error occurred while generating the clip.');
+          setError(
+            data.error || "An error occurred while generating the clip.",
+          );
         } catch {
-          setError('An error occurred while generating the clip.');
+          setError("An error occurred while generating the clip.");
         }
       } else {
-        setError(err.message || 'Network error');
+        setError(err.message || "Network error");
       }
     } finally {
       setIsLoading(false);
@@ -76,6 +82,6 @@ export const useClip = () => {
     isLoading,
     progress,
     error,
-    success
+    success,
   };
 };

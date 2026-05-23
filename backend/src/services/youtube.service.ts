@@ -1,9 +1,11 @@
-import youtubedl from 'youtube-dl-exec';
 import { generateTempFilePath } from '../utils/file';
 import ffmpegInstaller from '@ffmpeg-installer/ffmpeg';
 
 export const downloadAndClipVideo = async (url: string, startTime: string, endTime: string): Promise<string> => {
   const outputPath = generateTempFilePath('mp4');
+  
+  // Trick to dynamically load ESM module in CommonJS without TS converting it to require()
+  const youtubedl = (await eval(`import('youtube-dl-exec')`)).default;
   
   await youtubedl(url, {
     output: outputPath,

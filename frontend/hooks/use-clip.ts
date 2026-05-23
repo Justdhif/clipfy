@@ -28,7 +28,7 @@ export const useClip = () => {
         });
       }, 1500);
 
-      const response = await axios.post('http://localhost:4000/api/clip', options, {
+      const response = await axios.post('http://127.0.0.1:4000/api/clip', options, {
         responseType: 'blob', // Important for downloading files
       });
 

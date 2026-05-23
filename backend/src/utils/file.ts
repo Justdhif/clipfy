@@ -1,9 +1,10 @@
 import fs from 'fs';
 import path from 'path';
 import crypto from 'crypto';
+import os from 'os';
 
 export const getTempDir = () => {
-  const tempDir = path.join(__dirname, '../../temp');
+  const tempDir = path.join(os.tmpdir(), 'clipify-temp');
   if (!fs.existsSync(tempDir)) {
     fs.mkdirSync(tempDir, { recursive: true });
   }

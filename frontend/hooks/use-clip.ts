@@ -60,7 +60,7 @@ export const useClip = () => {
         try {
           const data = JSON.parse(text);
           setError(
-            data.error || "An error occurred while generating the clip.",
+            data.details ? `${data.error}: ${data.details}` : data.error || "An error occurred while generating the clip.",
           );
         } catch {
           setError("An error occurred while generating the clip.");

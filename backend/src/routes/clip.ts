@@ -50,7 +50,10 @@ router.post('/', async (req: Request, res: Response) => {
     // Clean up on error
     if (finalVideoPath) cleanupFiles([finalVideoPath]);
 
-    res.status(500).json({ error: 'Failed to process video' });
+    res.status(500).json({ 
+      error: 'Failed to process video', 
+      details: error instanceof Error ? error.message : String(error) 
+    });
   }
 });
 

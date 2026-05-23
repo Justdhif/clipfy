@@ -1,6 +1,13 @@
 import { generateTempFilePath } from '../utils/file';
 import ffmpegInstaller from '@ffmpeg-installer/ffmpeg';
 
+// Trick Vercel's bundler (@vercel/nft) into tracing the entire package and its 
+// dependencies (like 'dargs') without crashing the app at runtime!
+if (process.env.NODE_ENV === 'development' && false) {
+  // @ts-ignore
+  require('youtube-dl-exec');
+}
+
 export const downloadAndClipVideo = async (url: string, startTime: string, endTime: string): Promise<string> => {
   const outputPath = generateTempFilePath('mp4');
   

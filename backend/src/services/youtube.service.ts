@@ -9,7 +9,7 @@ export const downloadAndClipVideo = async (url: string, startTime: string, endTi
   
   await youtubedl(url, {
     output: outputPath,
-    format: 'bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best',
+    format: 'bestvideo[height<=720][ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best',
     ffmpegLocation: ffmpegInstaller.path,
     downloadSections: `*${startTime}-${endTime}`,
     forceKeyframesAtCuts: true,

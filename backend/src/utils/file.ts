@@ -1,6 +1,6 @@
 import fs from 'fs';
 import path from 'path';
-import { v4 as uuidv4 } from 'uuid';
+import crypto from 'crypto';
 
 export const getTempDir = () => {
   const tempDir = path.join(__dirname, '../../temp');
@@ -11,7 +11,7 @@ export const getTempDir = () => {
 };
 
 export const generateTempFilePath = (extension: string) => {
-  return path.join(getTempDir(), `${uuidv4()}.${extension}`);
+  return path.join(getTempDir(), `${crypto.randomUUID()}.${extension}`);
 };
 
 export const cleanupFiles = (files: string[]) => {

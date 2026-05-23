@@ -14,7 +14,7 @@ export const downloadAndClipVideo = async (url: string, startTime: string, endTi
     noCheckCertificates: true,
     noWarnings: true,
     addHeader: ['referer:youtube.com', 'user-agent:Mozilla/5.0']
-  });
+  } as any);
 
   return outputPath;
 };

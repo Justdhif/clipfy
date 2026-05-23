@@ -30,8 +30,8 @@ export const useClip = () => {
 
       const baseUrl =
         process.env.NODE_ENV === "production"
-          ? process.env.NEXT_PUBLIC_API_URI
-          : process.env.NEXT_PUBLIC_LOCAL_URI;
+          ? "https://clipfy-backend-1e24nn3hz-justdhifs-projects.vercel.app"
+          : "http://127.0.0.1:4000";
 
       const response = await axios.post(`${baseUrl}/api/clip`, options, {
         responseType: "blob", // Important for downloading files

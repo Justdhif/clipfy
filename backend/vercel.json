@@ -1,6 +1,12 @@
 {
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/src/index.ts"
+    }
+  ],
   "functions": {
-    "src/**/*.ts": {
+    "src/index.ts": {
       "maxDuration": 60
     }
   }

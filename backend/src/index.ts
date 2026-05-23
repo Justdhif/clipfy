@@ -22,6 +22,10 @@ app.get('/health', (req, res) => {
   res.json({ status: 'ok' });
 });
 
-app.listen(PORT as number, '127.0.0.1', () => {
-  console.log(`Server is running on http://127.0.0.1:${PORT}`);
-});
+if (process.env.NODE_ENV !== 'production') {
+  app.listen(PORT as number, '127.0.0.1', () => {
+    console.log(`Server is running on http://127.0.0.1:${PORT}`);
+  });
+}
+
+export default app;
